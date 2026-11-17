@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lars | Computer Science & IT Portfolio</title>
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --border: #e2e8f0;
+      --badge-bg: #eff6ff;
+      --badge-text: #1e40af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Layout & Sections */
+    main {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    section {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 1.5rem;
+      background-color: var(--accent);
+      border-radius: 3px;
+    }
+
+    /* 1. Profile & Biography */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      background: var(--bg-surface);
+      padding: 2.25rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .profile-img {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--badge-bg);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .profile-info h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .bio-text {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* Cards & Grids */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03);
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-primary);
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p, .card li {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .card ul {
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .card li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Badges for Skills & Tech Stack */
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .badge {
+      background-color: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+    }
+
+    /* Projects */
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-preview {
+      width: 100%;
+      height: 165px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      background-color: #e2e8f0;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 1.1rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+
+    .project-link:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    /* Work Ethics */
+    .ethics-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .ethics-list li {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 1.15rem 1.25rem;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .ethics-list strong {
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 720px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 1.75rem 1.25rem;
+      }
+
+      .nav-container {
+        justify-content: center;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#profile" class="logo">Lars<span>.dev</span></a>
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#profile">Profile</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#ethics">Work Ethics</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Profile & Short Biography -->
+    <section id="profile">
+      <div class="profile-grid">
+        <!-- Replace src with your actual headshot file (e.g., assets/profile.jpg) -->
+        <img
+          src="https://via.placeholder.com/300x300.png?text=Your+Photo"
+          alt="Professional portrait of Lars"
+          class="profile-img"
+        />
+        <div class="profile-info">
+          <h1>Lars</h1>
+          <p class="subtitle">Bachelor of Science in Computer Science / Information Technology Student</p>
+          <!-- ~120 words -->
+          <p class="bio-text">
+            I am a dedicated Computer Science and Information Technology student passionate about designing clean, reliable, and user-centered software solutions. Currently pursuing my undergraduate degree, I focus on full-stack web development, algorithmic problem-solving, and data-driven applications. My journey in technology is driven by curiosity about how well-structured code translates complex ideas into practical everyday tools. Whether building responsive web interfaces, optimizing backend logic, or collaborating on team software builds, I enjoy breaking down technical challenges into clear, maintainable systems. Outside of coursework, I actively explore modern web frameworks, automation workflows, and open-source tools to continuously sharpen my engineering capabilities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Academic Background -->
+    <section id="education">
+      <h2>Academic Background</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Bachelor of Science in Computer Science / IT</h3>
+          <p class="meta">University / College Name &bull; Expected Graduation: 2028</p>
+          <p><strong>Relevant Coursework &amp; Specializations:</strong></p>
+          <ul>
+            <li>Data Structures and Algorithms</li>
+            <li>Web Systems and Technologies (HTML5, CSS3, JS)</li>
+            <li>Object-Oriented Programming (Java &amp; C++)</li>
+            <li>Database Management Systems &amp; SQL</li>
+            <li>Software Engineering &amp; System Analysis</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Senior High School &mdash; STEM / ICT Track</h3>
+          <p class="meta">Senior High School Name &bull; Graduated: 2024</p>
+          <p><strong>Academic Focus:</strong></p>
+          <ul>
+            <li>Foundations of Computer Programming &amp; Logic</li>
+            <li>Discrete Mathematics &amp; Analytical Reasoning</li>
+            <li>Capstone Research in Applied Information Technology</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Notable Achievements -->
+    <section id="achievements">
+      <h2>Notable Achievements</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Academic Honors &amp; Recognition</h3>
+          <p class="meta">Dean's List &bull; 2024 &ndash; 2026</p>
+          <p>Recognized for maintaining a high GPA across core Computer Science, mathematics, and programming laboratory courses.</p>
+        </div>
+        <div class="card">
+          <h3>Responsive Web Design Certification</h3>
+          <p class="meta">freeCodeCamp &bull; Completed 2025</p>
+          <p>Completed 300 hours of hands-on coursework covering semantic HTML5, modern CSS Grid/Flexbox layouts, and web accessibility standards.</p>
+        </div>
+        <div class="card">
+          <h3>University Hackathon Participant</h3>
+          <p class="meta">Annual Student Tech Challenge &bull; 2025</p>
+          <p>Collaborated in a 4-member team to prototype a campus resource tracker within 24 hours, handling front-end architecture and UI design.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Skillset & Programming Languages -->
+    <section id="skills">
+      <h2>Skillset &amp; Programming Languages</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Web &amp; Frontend Development</h3>
+          <div class="badge-group">
+            <span class="badge">HTML5</span>
+            <span class="badge">CSS3 (Flexbox &amp; Grid)</span>
+            <span class="badge">JavaScript (ES6+)</span>
+            <span class="badge">Responsive Design</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Programming &amp; Databases</h3>
+          <div class="badge-group">
+            <span class="badge">Python</span>
+            <span class="badge">Java</span>
+            <span class="badge">C++</span>
+            <span class="badge">SQL / MySQL</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Tools &amp; Soft Skills</h3>
+          <div class="badge-group">
+            <span class="badge">Git &amp; GitHub</span>
+            <span class="badge">VS Code</span>
+            <span class="badge">Analytical Problem-Solving</span>
+            <span class="badge">Agile Teamwork</span>
+            <span class="badge">Technical Documentation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Projects & Researches -->
+    <section id="projects">
+      <h2>Projects &amp; Researches</h2>
+      <div class="card-grid">
+        <!-- Project 1 -->
+        <article class="card project-card">
+          <div>
+            <img
+              src="https://via.placeholder.com/600x320.png?text=Student+Task+Tracker+Preview"
+              alt="Screenshot of Student Task and Exam Planner"
+              class="project-preview"
+            />
+            <h3>1. Academic Task &amp; Exam Planner Web App</h3>
+            <p class="meta">Personal Web Application</p>
+            <p>
+              <strong>Objective:</strong> Designed a lightweight browser-based planner that helps college students organize upcoming exams, assignments, and study milestones with priority filtering and local storage persistence.
+            </p>
+            <div class="badge-group">
+              <span class="badge">HTML5</span>
+              <span class="badge">CSS3</span>
+              <span class="badge">JavaScript</span>
+              <span class="badge">LocalStorage API</span>
+            </div>
+          </div>
+          <a href="https://github.com/yourusername/academic-planner" target="_blank" rel="noopener" class="project-link">
+            View Repository on GitHub &rarr;
+          </a>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card project-card">
+          <div>
+            <img
+              src="https://via.placeholder.com/600x320.png?text=Inventory+Management+CLI+Preview"
+              alt="Screenshot of Inventory Management System"
+              class="project-preview"
+            />
+            <h3>2. Campus Laboratory Inventory Management System</h3>
+            <p class="meta">Coursework Software Build</p>
+            <p>
+              <strong>Objective:</strong> Built an object-oriented inventory tracking system capable of logging equipment check-ins, check-outs, and low-stock alerts using file-backed data structures.
+            </p>
+            <div class="badge-group">
+              <span class="badge">Java</span>
+              <span class="badge">OOP</span>
+              <span class="badge">File I/O</span>
+              <span class="badge">Git</span>
+            </div>
+          </div>
+          <a href="https://github.com/yourusername/lab-inventory-system" target="_blank" rel="noopener" class="project-link">
+            View Repository on GitHub &rarr;
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. Work Ethics & Core Values -->
+    <section id="ethics">
+      <h2>Work Ethics &amp; Core Values</h2>
+      <ul class="ethics-list">
+        <li>
+          <strong>Commitment to Clean, Maintainable Code</strong>
+          Writing well-structured, readable, and properly documented code so teammates and future maintainers can easily understand and scale the system.
+        </li>
+        <li>
+          <strong>Analytical Problem-Solving</strong>
+          Approaching bugs and system bottlenecks methodically by isolating root causes, testing edge cases, and validating solutions with evidence.
+        </li>
+        <li>
+          <strong>Continuous Learning &amp; Adaptability</strong>
+          Staying proactive in learning emerging web standards, frameworks, and development tools in a rapidly evolving tech landscape.
+        </li>
+        <li>
+          <strong>Accountability &amp; Punctuality</strong>
+          Respecting project timelines, communicating progress transparently, and taking ownership of deliverables from initial design to final deployment.
+        </li>
+        <li>
+          <strong>Collaborative Mindset</strong>
+          Valuing constructive peer reviews, clear communication, and shared problem-solving when working in cross-functional teams.
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Lars &bull; Personal Web Portfolio. Built with semantic HTML5 &amp; CSS3.</p>
+  </footer>
+
+</body>
+</html>
